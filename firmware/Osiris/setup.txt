@@ -1,0 +1,10 @@
+Setting	Value	Why
+Flash Size	16MB (128Mb)	Matches N16
+
+Partition Scheme	16M Flash (3MB APP/9.9MB FATFS)	Raises the IDE sketch size limit from 1.25 MB to 3 MB so the ~1.5 MB firmware links cleanly; sketch-local partitions.csv still supplies the custom 16 MB flash partition table.
+
+PSRAM	OPI PSRAM	Matches R8 (octal SPI PSRAM — not "QSPI PSRAM", that's a different variant)
+
+USB Mode	USB-OTG (TinyUSB)	Required for USBHIDKeyboard/USBHIDMouse to actually enumerate as HID. Left on the default "Hardware CDC and JTAG" mode, the native port never becomes a keyboard/mouse at all — a real, separate failure mode from the boot hang.
+
+USB CDC On Boot	Disabled	Keeps Serial bound to the hardware UART0 — which is wired out through the CH343 chip on your second USB-C port. This is what keeps the CMD: protocol link cleanly separate from the HID injection port, matching how the board is actually built.

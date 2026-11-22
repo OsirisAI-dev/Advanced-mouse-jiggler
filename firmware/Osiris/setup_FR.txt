@@ -1,0 +1,10 @@
+Paramètre	Valeur	Pourquoi
+Taille de la Flash	16MB (128Mb)	Correspond à la version N16 de l'ESP32-S3
+
+Schéma de partitions	16M Flash (3MB APP/9.9MB FATFS)	Porte la limite de compilation de 1,25 Mo à 3 Mo pour permettre l'édition de liens du firmware (~1,5 Mo) ; le fichier local partitions.csv reste utilisé pour le partitionnement 16 Mo.
+
+PSRAM	OPI PSRAM	Correspond à la version R8 (PSRAM SPI octale — et non pas "QSPI PSRAM", qui est une variante différente)
+
+Mode USB	USB-OTG (TinyUSB)	Indispensable pour que USBHIDKeyboard / USBHIDMouse soient reconnus comme de véritables périphériques HID. Laissé sur la valeur par défaut "Hardware CDC and JTAG", le port natif ne devient jamais un clavier/souris.
+
+USB CDC On Boot	Disabled	Maintient la liaison Serial reliée au port matériel UART0 — qui est raccordé à la puce CH343 sur le second port USB-C. C'est ce qui permet de séparer proprement la liaison de commande CMD: du port d'injection HID natif.
